@@ -4,9 +4,12 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define SCK_ON  (GPIO_SET0 = (1 << 31))
-#define SCK_OFF (GPIO_CLR0 = (1 << 31))
-#define DT_R    (GPIO_IN0 & (1 << 30))
+#define CLOCK_PIN	31
+#define DATA_PIN	30
+
+#define SCK_ON  (GPIO_SET0 = (1 << CLOCK_PIN))
+#define SCK_OFF (GPIO_CLR0 = (1 << CLOCK_PIN))
+#define DT_R    (GPIO_IN0 & (1 << DATA_PIN))
 
 void           reset_converter(void);
 unsigned long  read_cnt(long offset);
@@ -28,20 +31,20 @@ void setHighPri (void)
 
 void setup_gpio()
 {
-  INP_GPIO(30);
-  INP_GPIO(31);  OUT_GPIO(31);
+  INP_GPIO(DATA_PIN);
+  INP_GPIO(CLOCK_PIN);  OUT_GPIO(CLOCK_PIN);
   SCK_OFF;
 
 //   GPIO_PULL = 0;
 //   short_wait();
-//   GPIO_PULLCLK0 = 1 << 30;
+//   GPIO_PULLCLK0 = 1 << DATA_PIN;
  //  short_wait();
 //   GPIO_PULL = 0;
 //   GPIO_PULLCLK0 = 0;
 
 /*   GPIO_PULL = 2;
    short_wait();
-   GPIO_PULLCLK0 = 1 << 30;
+   GPIO_PULLCLK0 = 1 << DATA_PIN;
    short_wait();
    GPIO_PULL = 0;
    GPIO_PULLCLK0 = 0;*/
@@ -51,7 +54,7 @@ void 	unpull_pins()
 {
    GPIO_PULL = 0;
 //   short_wait();
-   GPIO_PULLCLK0 = 1 << 30;
+   GPIO_PULLCLK0 = 1 << DATA_PIN;
 //   short_wait();
    GPIO_PULL = 0;
    GPIO_PULLCLK0 = 0;
@@ -69,7 +72,7 @@ int main(int argc, char **argv)
   float filter_low, filter_high;
   float spread_percent = 0.1/2;
   int b;
-  int nsamples=32;
+  int nsamples=64;
   long samples[nsamples];
 
   if (argc == 2) {
@@ -192,6 +195,9 @@ unsigned long read_cnt(long offset) {
  if (count & 0x800000) {
 	count |= (long) ~0xffffff;
  }
+
+// if things are broken this will show actual data
+
 /* for (i=32;i;i--) {
    printf("%d ", ((count-offset) & ( 1 << i )) > 0 );
   }

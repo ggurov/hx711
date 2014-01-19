@@ -1,2 +1,2 @@
-c_test: c_test.c gb_common.c
-	gcc  -o c_test c_test.c gb_common.o
+hx711: hx711.c gb_common.c
+	gcc  -o hx711 hx711.c gb_common.o
