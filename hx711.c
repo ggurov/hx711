@@ -1,3 +1,9 @@
+/* 
+ gurov was here, use this code, or don't, whatever, I don't care. If you see a giant bug with a billion legs, please let me know so it can be squashed
+
+*/
+
+
 #include <stdio.h>
 #include "gb_common.h"
 #include <sched.h>
@@ -6,13 +12,15 @@
 
 #define CLOCK_PIN	31
 #define DATA_PIN	30
+#define N_SAMPLES	64
+#define SPREAD		10
 
 #define SCK_ON  (GPIO_SET0 = (1 << CLOCK_PIN))
 #define SCK_OFF (GPIO_CLR0 = (1 << CLOCK_PIN))
-#define DT_R    (GPIO_IN0 & (1 << DATA_PIN))
+#define DT_R    (GPIO_IN0  & (1 << DATA_PIN))
 
 void           reset_converter(void);
-unsigned long  read_cnt(long offset);
+unsigned long  read_cnt(long offset, int argc);
 void           set_gain(int r);
 void           setHighPri (void);
 
@@ -70,9 +78,9 @@ int main(int argc, char **argv)
   long tmp_avg2;
   long offset=0;
   float filter_low, filter_high;
-  float spread_percent = 0.1/2;
+  float spread_percent = SPREAD / 100.0 /2.0;
   int b;
-  int nsamples=64;
+  int nsamples=N_SAMPLES;
   long samples[nsamples];
 
   if (argc == 2) {
@@ -89,7 +97,7 @@ int main(int argc, char **argv)
   // get the dirty samples and average them
   for(i=0;i<nsamples;i++) {
   	reset_converter();
-  	samples[i] = read_cnt(0);
+  	samples[i] = read_cnt(0, argc);
   	tmp_avg += samples[i];
   }
 
@@ -147,7 +155,7 @@ void set_gain(int r) {
 }
 
 
-unsigned long read_cnt(long offset) {
+unsigned long read_cnt(long offset, int argc) {
 	long count;
 	int i;
 	int b;
@@ -198,13 +206,16 @@ unsigned long read_cnt(long offset) {
 
 // if things are broken this will show actual data
 
-/* for (i=32;i;i--) {
+
+if (argc < 2 ) {
+ for (i=32;i;i--) {
    printf("%d ", ((count-offset) & ( 1 << i )) > 0 );
   }
 
   printf("n: %10d     -  ", count - offset);
   printf("\n"); 
-*/
+}
+
   return (count - offset);
 
 }
