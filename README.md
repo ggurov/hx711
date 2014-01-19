@@ -22,12 +22,15 @@ It will display a bunch of stuff:
 
 root@bare-rasberripi:~/hx711# ./hx711
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 0 1 1 1 1 1 1 0 0 n:       7672     -
+
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 0 1 1 1 1 1 0 n:       8060     -
 
 *SNIP* 
 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 0 1 1 1 1 1 n:       8126     -
+
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 0 1 1 1 1 1 1 n:       8062     -
+
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 0 0 1 1 1 n:       8142     -
 8038
 
@@ -38,10 +41,13 @@ If there's nothing on the scale, this is the zero, tare, whatever. the number it
 Running it like so:
 
 root@bare-rasberripi:~/hx711# ./hx711 8038
+
 -66
 root@bare-rasberripi:~/hx711# ./hx711 8038
+
 -87
 root@bare-rasberripi:~/hx711# ./hx711 8038
+
 -138
 
 With the argument being the average, removes the debug info, and subtracts the 1st argument from the 2nd average. 
@@ -59,10 +65,10 @@ some code has been borrowed from the gertboard distribution to define the memory
 
 at the top of HX711.c there two defines:
 
- #define CLOCK_PIN       31
- #define DATA_PIN        30
- #define N_SAMPLES       64
- #define SPREAD          10
+ define CLOCK_PIN       31
+ define DATA_PIN        30
+ define N_SAMPLES       64
+ define SPREAD          10
 
 CLOCK pin goes to PD_CLK (pin 11 on HX711, and SCK pin on shield)
 DATA  pin goes to DOUT (pin 12 on HX711, and DT pin on shield)
