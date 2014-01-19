@@ -59,10 +59,10 @@ some code has been borrowed from the gertboard distribution to define the memory
 
 at the top of HX711.c there two defines:
 
-#define CLOCK_PIN       31
-#define DATA_PIN        30
-#define N_SAMPLES       64
-#define SPREAD          10
+ #define CLOCK_PIN       31
+ #define DATA_PIN        30
+ #define N_SAMPLES       64
+ #define SPREAD          10
 
 CLOCK pin goes to PD_CLK (pin 11 on HX711, and SCK pin on shield)
 DATA  pin goes to DOUT (pin 12 on HX711, and DT pin on shield)
