@@ -10,7 +10,6 @@ http://www.dfrobot.com/image/data/SEN0160/HX711_english.pdf
 http://www.amazon.com/SMAKN-Weighing-Dual-channel-Conversion-Shieding/dp/B00FVGRZ42 = $10
 
 Compile by running make, which effectively does: 
-
 	gcc  -o HX711 HX711.c gb_common.o
 
 Run it like so:
