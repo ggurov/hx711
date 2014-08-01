@@ -304,6 +304,7 @@ void restore_io()
   free(pwm_mem_orig);
   free(gpio_mem_orig);
   free(clk_mem_orig);
+  close(mem_fd);
 } // restore_io
 
 // simple routine to convert the last several bits of an integer to a string 
