@@ -208,8 +208,8 @@ unsigned long read_cnt(long offset, int argc) {
 
 
 if (argc < 2 ) {
- for (i=32;i;i--) {
-   printf("%d ", ((count-offset) & ( 1 << i )) > 0 );
+  for (i=31;i>=0;i--) {
+   printf("%d ", ((count-offset) & ( 1 << i )) != 0 );
   }
 
   printf("n: %10d     -  ", count - offset);
