@@ -172,17 +172,17 @@ unsigned long read_cnt(long offset, int argc) {
 
   for(i=0;i<24	; i++) {
 	SCK_ON;
+        count = count << 1;
 	b++;
 	b++;
 	b++;
 	b++;
-        if (DT_R > 0 ) { count++; }
         SCK_OFF;
 	b++;
 	b++;
-	b++;
-	b++;
-        count = count << 1;
+        if (DT_R > 0 ) { count++; }
+//	b++;
+//	b++;
   }
 
 
@@ -208,8 +208,8 @@ unsigned long read_cnt(long offset, int argc) {
 
 
 if (argc < 2 ) {
- for (i=32;i;i--) {
-   printf("%d ", ((count-offset) & ( 1 << i )) > 0 );
+  for (i=31;i>=0;i--) {
+   printf("%d ", ((count-offset) & ( 1 << i )) != 0 );
   }
 
   printf("n: %10d     -  ", count - offset);

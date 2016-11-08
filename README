@@ -5,7 +5,7 @@ raspberry pi HX711 weight scale interface
 -----------------------------------------
 
 this thing interfaces with 24-Bit Analog-to-Digital Converter (ADC) for Weigh Scales
-http://www.dfrobot.com/image/data/SEN0160/HX711_english.pdf
+https://github.com/sparkfun/HX711-Load-Cell-Amplifier/blob/master/datasheets/hx711_english.pdf
 
 http://www.amazon.com/SMAKN-Weighing-Dual-channel-Conversion-Shieding/dp/B00FVGRZ42 = $10
 
