@@ -172,17 +172,17 @@ unsigned long read_cnt(long offset, int argc) {
 
   for(i=0;i<24	; i++) {
 	SCK_ON;
+        count = count << 1;
 	b++;
 	b++;
 	b++;
 	b++;
-        if (DT_R > 0 ) { count++; }
         SCK_OFF;
 	b++;
 	b++;
-	b++;
-	b++;
-        count = count << 1;
+        if (DT_R > 0 ) { count++; }
+//	b++;
+//	b++;
   }
 
 
